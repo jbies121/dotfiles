@@ -1,7 +1,28 @@
 # zsh config
 eval "$(starship init zsh)"
+autoload -U compinit; compinit
 
-#. "$HOME/.asdf/asdf.sh"
+# Function to check for 'Headphone' on all sound cards and set volume
+check_and_set_headphone_volume() {
+    # Get the unique list of sound card indices
+    sound_cards=$(aplay -l | grep "^card" | sed -n 's/^card \([0-9]*\):.*/\1/p' | sort -u)
+
+    # Use a while loop to iterate over each line
+    echo "$sound_cards" | while IFS= read -r card; do
+        #echo "Checking sound card $card..."
+        if amixer -c "$card" controls 2>/dev/null | grep -iq 'Headphone'; then
+            #echo "Headphone control found on sound card $card. Setting volume to maximum..."
+            amixer -c "$card" set 'Headphone' 100% unmute 1>/dev/null
+            return 0  # Exit the function if successful
+        fi
+    done
+
+    echo "No 'Headphone Playback Volume' control found on any sound card."
+    return 1  # Return failure if no card has the control
+}
+
+# Call the function when the shell starts
+check_and_set_headphone_volume
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -18,6 +39,15 @@ autoload -U colors && colors
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias nv='nvim'
+
+typeset -T LD_LIBRARY_PATH ld_library_path
+path+=('/home/jake/scripts')
+export PATH
+
+# Harware Raytracing
+export VKD3D_CONFIG=dxr11,dxr
+export PROTON_ENABLE_NVAPI=1
+export PROTON_ENABLE_NGX_UPDATER=1
 
 # https://wiki.archlinux.org/title/Zsh#Key_bindings
 # create a zkbd compatible hash;
@@ -1341,3 +1371,19 @@ else
 fi
 
 export GPG_TTY=$(tty)
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' format '%d'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' original false
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle :compinstall filename '/home/jake/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
