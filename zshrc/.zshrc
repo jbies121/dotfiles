@@ -37,7 +37,8 @@ autoload -Uz compinit && compinit
 
 autoload -U colors && colors
 
-alias ls='ls --color=auto'
+alias ls='eza -F'
+alias lsl='eza -alF'
 alias grep='grep --color=auto'
 alias nv='nvim'
 
