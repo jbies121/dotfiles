@@ -1,6 +1,7 @@
 # zsh config
 eval "$(starship init zsh)"
 autoload -U compinit; compinit
+export EDITOR="/usr/bin/nvim"
 
 # Function to check for 'Headphone' on all sound cards and set volume
 check_and_set_headphone_volume() {
