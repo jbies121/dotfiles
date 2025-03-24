@@ -1,6 +1,5 @@
 # zsh config
 eval "$(starship init zsh)"
-autoload -U compinit; compinit
 export EDITOR="/usr/bin/nvim"
 
 # Function to check for 'Headphone' on all sound cards and set volume
@@ -37,8 +36,9 @@ autoload -Uz compinit && compinit
 
 autoload -U colors && colors
 
-alias ls='eza -F'
-alias lsl='eza -alF'
+alias ls='ls --color=auto'
+alias jf='eza -F'
+alias jfj='eza -alF'
 alias grep='grep --color=auto'
 alias nv='nvim'
 

@@ -9,4 +9,4 @@ background-opacity = 0.90
 gtk-titlebar = false
 #custom-shader = /home/jake/projects/ghostty-shaders/bettercrt.glsl
 #custom-shader = /home/jake/projects/ghostty-shaders/glow-rgbsplit-twitchy.glsl
-custom-shader = /home/jake/projects/ghostty-shaders/in-game-crt.glsl
+#custom-shader = /home/jake/projects/ghostty-shaders/in-game-crt.glsl
