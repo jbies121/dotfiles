@@ -30,23 +30,8 @@ return {
       lspconfig.tailwindcss.setup({
         capabilities = capabilities
       })
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.jsonls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.bashls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.yamlls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.solargraph.setup({
-        capabilities = capabilities
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities
+      lspconfig.ruby_lsp.setup({
+        capabilities = capabilities,
       })
       lspconfig.lua_ls.setup({
         capabilities = capabilities
